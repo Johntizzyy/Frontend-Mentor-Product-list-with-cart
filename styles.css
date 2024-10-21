@@ -15,7 +15,7 @@ body{
   /* border: 2px solid red; */
   width: 90%;
   margin: 50px auto;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Red Hat Text", sans-serif;
   /* background-color: hsl(0, 0%, 20%); */
 
 }
@@ -40,7 +40,12 @@ h1 {
   border-radius: 10px;
   transition: ease-in-out border 0.1s;
 }
-
+.dessertItems{
+    /* background: #fff; */
+    box-shadow: 0 0 5px hsl(0, 0%, 80%);
+    /* padding: 10px; */
+    border-radius:5px;
+}
 .addTocart button{
     transition: 0.2s ease-in-out;
 }
@@ -63,7 +68,7 @@ h1 {
 .addTocart button {
   /* display: flex;
     align-items: center; */
-  padding: 15px 40px;
+  padding: 12px 40px;
   border-radius: 30px;
   border: none;
   box-shadow: 0 0 2px #000;
@@ -71,21 +76,24 @@ h1 {
   bottom: 20px;
   left: 50px;
   font-size: 1rem;
-  font-weight:bold
-  
+  font-weight:bold;
+  color:hsl(0, 0%, 15%);
 }
 .dessertItems p {
   color: #808080;
   font-size: 0.9rem;
   margin: 5px 0;
+  padding-left: 15px;
 }
 .dessertItems h2 {
   font-size: 1.3rem;
   margin: 5px 0;
   color: hsl(0, 0%, 10%);
+  padding-left: 15px;
 }
 .dessertItems h2.price {
   color: var(--red);
+  font-size: 1rem;
 }
 
 /* Styling for cart aspect */
@@ -216,5 +224,10 @@ hr{
     }
     .itemDetails div {
         padding: 5px 0;
+    }
+    .addTocart button{
+        position: relative;
+        bottom: 20px;
+        left: 15=0px;
     }
 }
