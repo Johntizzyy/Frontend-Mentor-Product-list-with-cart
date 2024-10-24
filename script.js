@@ -16,6 +16,7 @@ fetch("./data.json") // Adjust the path if necessary
       throw new Error("Network response was not ok " + response.statusText);
     }
     return response.json(); // Parse the JSON data
+    
   })
   .then((Data) => {
     let desserts = Data.map(
@@ -30,8 +31,10 @@ fetch("./data.json") // Adjust the path if necessary
                     <div class="addTocart" data-name=${
                       data.name
                     } data-category=${data.category} data-price=${
-          Number.isInteger(data.price) ? data.price + ".00" : data.price + "0"
-        }>
+          Number.isInteger(data.price) ? data.price + ".00" : data.price + "00"
+        } data-image = ${window.innerWidth <= 600
+          ? data.image.mobile
+          : data.image.desktop}>
                       <button id="addToCartBtn">Add to cart</button>
                     </div>
                     <p>${data.category}</p>
@@ -58,13 +61,17 @@ fetch("./data.json") // Adjust the path if necessary
         const productName = product.getAttribute("data-name");
         let productPrice = parseFloat(product.getAttribute("data-price"));
         const productCat = product.getAttribute("data-category");
+        const productImage = product.getAttribute("data-image")
 
         const orderTotal = document.querySelectorAll(".block-display");
         const emptyCart = document.getElementById("emptyCart");
 
+
         console.log(orderTotal);
 
+
         const iProduct = document.getElementById("product-name");
+
 
         iProduct.innerHTML = productName;
 
@@ -76,22 +83,44 @@ fetch("./data.json") // Adjust the path if necessary
         count += 1;
         totalP += productPrice;
 
+
         pricesArray.push(productPrice);
         console.log(pricesArray);
 
+
+        let priceSum = 0
+        for(const num of pricesArray){
+          priceSum += num
+        }
+        console.log(priceSum)
+
+
         const cartItems = document.getElementById("cartItemsz");
+        const total = document.getElementById('total')
+        
         const cartItem = `
 
           <div class="itemDetails">
             <div class="product-count">${count}x</div
-              ><div class="initial-price">@${productPrice}</div
-              ><div class="total-price">$${totalP}</div></div>              
+              ><div class="initial-price">@${Number.isInteger(productPrice)?`${productPrice}.00`:`${productPrice}0`}</div
+              ><div class="total-price">$${Number.isInteger(priceSum)?`${priceSum}.00`:`${priceSum}0`}</div></div>              
 
           </div>
                
       `;
+
         cartItems.innerHTML = cartItem;
-        console.log((totalP += productPrice));
+        total.innerHTML = Number.isInteger(priceSum)?`$${priceSum}.00`:`$${priceSum}0`
+  
+
+
+        confirmButton.addEventListener("click", () => {
+          finalCart.style.display = "block";
+          overlay.style.display = "block"
+          // document.body.style.backgroundColor = "red"
+          finalCartStyle(productImage,count,productName,productPrice,priceSum)
+          // console.log(finalCart)
+        });
       };
     });
   })
@@ -99,20 +128,16 @@ fetch("./data.json") // Adjust the path if necessary
     console.error("There was a problem with the fetch operation:", error);
   });
 
+
+
 const confirmButton = document.getElementById("confirm-button");
 const finalCart = document.getElementById("confirm");
 const overlay = document.getElementById('overlay')
 
 
-confirmButton.addEventListener("click", () => {
-  finalCart.style.display = "block";
-  overlay.style.display = "block"
-  // document.body.style.backgroundColor = "red"
-  finalCartStyle()
-  // console.log(finalCart)
-});
 
-function finalCartStyle() {
+
+function finalCartStyle(img,count,productName,productPrice,priceSum) {
   let finalCartDiv = `
   <img src="assets/images/icon-order-confirmed.svg" />
       <h1>Order confirmed</h1>
@@ -122,19 +147,19 @@ function finalCartStyle() {
 
         <div class="final-cart">
           <div class="div-1">
-            <img src="assets/images/image-baklava-desktop.jpg" />
+            <img src=${img} />
             <div class="cart-details">
-              <h3>Waffles</h3>
-              <p><span class="s-1">1x</span> <span class="s-2">@5.50</span></p>
+              <h3>${productName}</h3>
+              <p><span class="s-1">${count}x</span> <span class="s-2">@${Number.isInteger(productPrice)?`${productPrice}.00`:`${productPrice}0`}</span></p>
             </div>
           </div>
-          <div class="total">$5.50</div>
+          <div class="total">$${Number.isInteger(priceSum)?`${priceSum}.00`:`${priceSum}0`}</div>
       </div>
 
       <div class="order-total block-display" >
         <div>
           <p>Order total</p>
-          <div class="total">$46.50</div>
+          <div class="total">$${Number.isInteger(priceSum)?`${priceSum}.00`:`${priceSum}0`}</div>
         </div>
         <button id="confirm-button">Confirm Order</button>
       </div>

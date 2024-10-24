@@ -11,7 +11,7 @@ body {
   height: 100vh;
   position: relative;
   font-family: "Red Hat Text", sans-serif;
-  overflow: hidden;
+  /* overflow: hidden; */
 
 }
 #overlay {
@@ -90,6 +90,10 @@ body {
 }
 .s-2 {
   color:hsl(7, 20%, 60%);
+}
+.product-count{
+    color: var(--red);
+    font-weight: 700;
 }
 .total{
     color: hsl(14, 65%, 9%) ;
@@ -248,7 +252,9 @@ h1 {
 .itemDetails {
   color: hsl(0, 0%, 50%);
 }
-
+#confirm-button{
+    width: 100%;
+}
 .x-div {
   /* border: 2px solid hsl(0, 0%, 80%); */
   border-radius: 50%;
