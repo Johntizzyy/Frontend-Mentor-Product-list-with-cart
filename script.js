@@ -8,14 +8,19 @@
 // index.js
 
 const dessertContainer = document.getElementById("dessert-cont");
-// console.log(finalCart.textContent)
 
-fetch("./data.json") // Adjust the path if necessary
+function scrollTo () {
+  window.scrollTo({
+    top:document.body.scrollHeight,
+    behavior:"smooth"
+  })
+}
+fetch("./data.json")
   .then((response) => {
     if (!response.ok) {
       throw new Error("Network response was not ok " + response.statusText);
     }
-    return response.json(); // Parse the JSON data
+    return response.json(); 
     
   })
   .then((Data) => {
@@ -57,6 +62,10 @@ fetch("./data.json") // Adjust the path if necessary
       let pricesArray = [];
 
       button.onclick = () => {
+        if(window.innerWidth <= 600){
+          scrollTo()
+        }
+
         const product = button.parentElement;
         const productName = product.getAttribute("data-name");
         let productPrice = parseFloat(product.getAttribute("data-price"));
@@ -166,3 +175,5 @@ function finalCartStyle(img,count,productName,productPrice,priceSum) {
   `;
   return finalCart.innerHTML = finalCartDiv
 }
+
+

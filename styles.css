@@ -131,7 +131,8 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  justify-content: center;
+  gap: 10px;
 }
 .dessert-container .dessertItems img {
   width: 100%;
