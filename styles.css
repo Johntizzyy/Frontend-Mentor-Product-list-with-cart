@@ -250,7 +250,8 @@ h1 {
 }
 
 .x-div {
-  border: 2px solid hsl(0, 0%, 80%);
+  /* border: 2px solid hsl(0, 0%, 80%); */
+  border-radius: 50%;
   /* display: none; */
 }
 .x-div img {
