@@ -91,8 +91,6 @@ fetch("./data.json")
         console.log(iProduct);
         count += 1;
         totalP += productPrice;
-
-
         pricesArray.push(productPrice);
         console.log(pricesArray);
 
@@ -121,9 +119,15 @@ fetch("./data.json")
         cartItems.innerHTML = cartItem;
         total.innerHTML = Number.isInteger(priceSum)?`$${priceSum}.00`:`$${priceSum}0`
   
-
+function scrollToTop () {
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  })
+}
 
         confirmButton.addEventListener("click", () => {
+          scrollToTop()
           finalCart.style.display = "block";
           overlay.style.display = "block"
           // document.body.style.backgroundColor = "red"
